@@ -2,3 +2,6 @@
 title: "Heart Disease classification Group"
 output: word_document
 ---
+
+#push trial
+library(tidyverse)
