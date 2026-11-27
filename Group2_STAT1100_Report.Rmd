@@ -3,5 +3,38 @@ title: "Heart Disease classification Group"
 output: word_document
 ---
 
-#push trial
-library(tidyverse)
+R
+
+# STAT 1100 Group Project Starter Script
+# Methodology Framework: Machine Learning Essentials (Chapter 32)
+
+# -------------------------------------------------------------------------
+# Load required packages
+# -------------------------------------------------------------------------
+library(caret)
+library(rpart)
+library(rpart.plot)
+
+# -------------------------------------------------------------------------
+# STEP 1: Load and Clean Clinical Health Data
+# -------------------------------------------------------------------------
+heart_data <- read.csv("heart.csv")
+head(heart_data)
+str(heart_data)
+
+# Convert the numerical target to a descriptive category factor
+heart_data$target <- factor(
+  heart_data$target,
+  levels = c(0, 1),
+  labels = c("No_Disease", "Disease")
+)
+
+# -------------------------------------------------------------------------
+# STEP 2: Balanced 80/20 Data Partitioning
+# -------------------------------------------------------------------------
+set.seed(123) # Lock seed for consistent groups across computers
+
+# Generate training indices preserving class balance
+train_index <- createDataPartition(heart_data$target, p = 0.80, list = FALSE)
+train_data  <- heart_data[train_index, ]
+test_data   <- heart_data[-train_index, ]
