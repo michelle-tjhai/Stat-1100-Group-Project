@@ -3,7 +3,6 @@ title: "Heart Disease classification Group"
 output: word_document
 ---
 
-R
 
 # STAT 1100 Group Project Starter Script
 # Methodology Framework: Machine Learning Essentials (Chapter 32)
@@ -12,13 +11,16 @@ R
 # Load required packages
 # -------------------------------------------------------------------------
 library(caret)
+
 library(rpart)
+
 library(rpart.plot)
 
 # -------------------------------------------------------------------------
 # STEP 1: Load and Clean Clinical Health Data
 # -------------------------------------------------------------------------
 heart_data <- read.csv("heart.csv")
+
 head(heart_data)
 str(heart_data)
 
