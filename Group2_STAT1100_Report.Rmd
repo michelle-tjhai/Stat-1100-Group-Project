@@ -22,7 +22,17 @@ library(rpart.plot)
 heart_data <- read.csv("heart.csv")
 
 head(heart_data)
+
 str(heart_data)
+
+#create original dataset file
+write.csv(heart_data, "Heart_Original.csv", row.names = FALSE)
+
+# Remove duplicate rows
+heart_data <- unique(heart_data)
+
+#Create cleaned dataset file
+write.csv(heart_data, "Heart_Cleaned.csv", row.names = FALSE)
 
 # Convert the numerical target to a descriptive category factor
 heart_data$target <- factor(
@@ -40,3 +50,9 @@ set.seed(123) # Lock seed for consistent groups across computers
 train_index <- createDataPartition(heart_data$target, p = 0.80, list = FALSE)
 train_data  <- heart_data[train_index, ]
 test_data   <- heart_data[-train_index, ]
+
+#Create files for both train and test datas
+write.csv(train_data, "Train_Data.csv", row.names = FALSE)
+
+write.csv(test_data, "Test_Data.csv", row.names = FALSE)
+
