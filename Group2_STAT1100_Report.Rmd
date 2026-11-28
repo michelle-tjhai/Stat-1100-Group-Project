@@ -89,7 +89,6 @@ cv_settings <- trainControl(method = "cv", number = 10)
 
 #Finding the best cp value
 
-set.seed(123)
 tuned_tree<-train(
 target~., 
 data=train_data, 
@@ -98,4 +97,23 @@ trControl = cv_settings,
 tuneLength = 10
 )
 
+# Optimization Plot (Accuracy vs cp curve)
+plot(
+tuned_tree, 
+main = "Cross Validation Accuracy vs Complexity Parameter(cp)"
+)
 
+#2. Pruned decision tree using 10-fold cross-validation
+set.seed(123)
+model2 <-train(
+target~ ., data = train_data, method = "rpart", 
+trControl = trainControl("cv", number = 10), 
+tuneLength = 10
+)
+
+plot(model2)
+model2$bestTune
+par(xpd=NA)
+plot(model2$finalModel)
+text(model2$finalModel, digits =3)
+model2$finalModel
