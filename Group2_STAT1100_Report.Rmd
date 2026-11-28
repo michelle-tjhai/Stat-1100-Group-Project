@@ -56,3 +56,29 @@ write.csv(train_data, "Train_Data.csv", row.names = FALSE)
 
 write.csv(test_data, "Test_Data.csv", row.names = FALSE)
 
+-----------------------------------------------------------------------------
+#1. Fit basic classification tree (default rpart)
+-----------------------------------------------------------------------------
+
+set.seed(123)
+model1<-rpart(target~.,method="class")
+par(xpd=NA)
+plot(model1,uniform=TRUE,margin=0.2,main = "Heart Decision Classification")
+text(model1,use.n=TRUE,all= TRUE,pretty=0,cex=0.9)
+
+-----------------------------------------------------------------------------
+#Predict on test set and compute classification accuracy
+-----------------------------------------------------------------------------
+
+predicted.classes<-model1 |> predict(test_data,type="class")
+head(predicted.classes)
+
+#compute classification accuracy
+
+accuracy<- mean(predicted.classes == test_data$target)
+
+round(accuracy*100,2)
+
+
+
+
