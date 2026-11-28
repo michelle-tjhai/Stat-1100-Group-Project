@@ -79,6 +79,23 @@ accuracy<- mean(predicted.classes == test_data$target)
 
 round(accuracy*100,2)
 
+#----------------------------------------------------------------------------
 
+#STEP 3: 10-Fold Cross-Validation for Tuning CP
+
+#----------------------------------------------------------------------------
+# Validation Framework
+cv_settings <- trainControl(method = "cv", number = 10)
+
+#Finding the best cp value
+
+set.seed(123)
+tuned_tree<-train(
+target~., 
+data=train_data, 
+method = "rpart",
+trControl = cv_settings, 
+tuneLength = 10
+)
 
 
